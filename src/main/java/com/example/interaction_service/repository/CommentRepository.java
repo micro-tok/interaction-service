@@ -15,6 +15,4 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findAllByUPID(String UPID);
     List<Comment> findAll();
     List<Comment> findAllByUUID(String UUID);
-
-    Long countAllByUUID(String userId);
 }
