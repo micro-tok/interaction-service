@@ -19,37 +19,33 @@ public class LikeServiceImpl implements LikeService {
     @Override
     public LikeDto save(LikeDto likeDto) {
         Like like = LikeMapper.INSTANCE.toEntity(likeDto);
-        System.out.println(like.getUUID());
-        System.out.println(like.getUPID());
-        if(likeRepository.findByUserIdAndPostId(like.getUUID(), like.getUPID()) != null) {
+        if(likeRepository.findByUUIDAndUPID(like.getUUID(), like.getUPID()) != null) {
             deleteLike(like.getUUID(), like.getUPID());
             return null;
         }
         Like saved = likeRepository.save(like);
-        System.out.println(saved.getUUID());
-        System.out.println(saved.getUPID());
         return LikeMapper.INSTANCE.toDto(saved);
     }
 
     @Override
     public LikeDto findLike(String userId, String postId) {
-        Like like = likeRepository.findByUserIdAndPostId(userId, postId);
+        Like like = likeRepository.findByUUIDAndUPID(userId, postId);
         return LikeMapper.INSTANCE.toDto(like);
     }
 
     @Override
     public void deleteLike(String userId, String postId) {
-        likeRepository.deleteByUserIdAndPostId(userId, postId);
+        likeRepository.deleteByUUIDAndUPID(userId, postId);
     }
 
     @Override
     public Long countAllByPostId(String postId) {
-        return likeRepository.countAllByPostId(postId);
+        return likeRepository.countAllByUPID(postId);
     }
 
     @Override
     public Long countAllByUserId(String userId) {
-        return likeRepository.countAllByUserId(userId);
+        return likeRepository.countAllByUUID(userId);
     }
 
     @Override
@@ -60,7 +56,7 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public List<LikeDto> findAllByUserId(String userId) {
-        List<Like> likes = likeRepository.findAllByUserId(userId);
+        List<Like> likes = likeRepository.findAllByUUID(userId);
         return likes.stream().map(LikeMapper.INSTANCE::toDto).collect(Collectors.toList());
     }
 }

@@ -13,14 +13,14 @@ public interface LikeMapper {
     LikeMapper INSTANCE = Mappers.getMapper(LikeMapper.class);
 
     // LikeDto to Like
-    @Mapping(target = "postId", source = "postId")
-    @Mapping(target = "userId", source = "userId")
+    @Mapping(target = "UPID", source = "UPID")
+    @Mapping(target = "UUID", source = "UUID")
     Like toEntity(LikeDto likeDto);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "postId", source = "postId")
-    @Mapping(target = "userId", source = "userId")
+    @Mapping(target = "UPID", source = "UPID")
+    @Mapping(target = "UUID", source = "UUID")
     LikeDto toDto(Like like);
 
-    List<Like> toEntitties(List<LikeDto> likeDtos);
+    List<Like> toEntities(List<LikeDto> likeDtos);
 }
