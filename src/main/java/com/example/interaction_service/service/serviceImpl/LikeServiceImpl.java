@@ -1,5 +1,6 @@
 package com.example.interaction_service.service.serviceImpl;
 
+import com.example.interaction_service.config.KafkaMessageSender;
 import com.example.interaction_service.dto.LikeDto;
 import com.example.interaction_service.entity.Like;
 import com.example.interaction_service.mapper.LikeMapper;
@@ -9,21 +10,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
+    private final KafkaMessageSender kafkaMessageSender;
 
     @Override
     public LikeDto save(LikeDto likeDto) {
         Like like = LikeMapper.INSTANCE.toEntity(likeDto);
-        if(likeRepository.findByUUIDAndUPID(like.getUUID(), like.getUPID()) != null) {
+        if (likeRepository.findByUUIDAndUPID(like.getUUID(), like.getUPID()) != null) {
             deleteLike(like.getUUID(), like.getUPID());
             return null;
         }
         Like saved = likeRepository.save(like);
+        kafkaMessageSender.sendMessage("notification-service", "{\"action\":\"like\",\"uuid\":\"" + likeDto.getPUUID() + "\"}");
         return LikeMapper.INSTANCE.toDto(saved);
     }
 
