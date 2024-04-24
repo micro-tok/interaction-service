@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class Producer {
     @Autowired()
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final String TOPIC_NAME = "twmjkjhb-notification-service";
+    private final String TOPIC_NAME = "notification-service";
     public Producer(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
