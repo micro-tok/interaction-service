@@ -17,7 +17,6 @@ public interface LikeMapper {
     @Mapping(target = "UUID", source = "UUID")
     Like toEntity(LikeDto likeDto);
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "UPID", source = "UPID")
     @Mapping(target = "UUID", source = "UUID")
     LikeDto toDto(Like like);
