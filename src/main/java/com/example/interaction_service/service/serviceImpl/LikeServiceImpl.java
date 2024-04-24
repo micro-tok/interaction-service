@@ -35,28 +35,34 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public void deleteLike(String userId, String postId) {
-        likeRepository.deleteByUUIDAndUPID(userId, postId);
+        likeRepository.delete(likeRepository.findByUUIDAndUPID(userId, postId));
     }
 
     @Override
     public Long countAllByPostId(String postId) {
-        return likeRepository.countAllByUPID(postId);
+        return (long) findAllByPostId(postId).size();
     }
 
     @Override
     public Long countAllByUserId(String userId) {
-        return likeRepository.countAllByUUID(userId);
+        return (long) findAllByUserId(userId).size();
     }
 
     @Override
     public List<LikeDto> findAll() {
         List<Like> likes = likeRepository.findAll();
-        return likes.stream().map(LikeMapper.INSTANCE::toDto).collect(Collectors.toList());
+        return LikeMapper.INSTANCE.toDtos(likes);
     }
 
     @Override
     public List<LikeDto> findAllByUserId(String userId) {
         List<Like> likes = likeRepository.findAllByUUID(userId);
-        return likes.stream().map(LikeMapper.INSTANCE::toDto).collect(Collectors.toList());
+        return LikeMapper.INSTANCE.toDtos(likes);
+    }
+
+    @Override
+    public List<LikeDto> findAllByPostId(String postId) {
+        List<Like> likes = likeRepository.findAllByUPID(postId);
+        return LikeMapper.INSTANCE.toDtos(likes);
     }
 }

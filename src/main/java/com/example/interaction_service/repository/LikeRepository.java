@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
     Like save(Like like);
-    Like findByUUIDAndUPID(String userId, String postId);
-    void deleteByUUIDAndUPID(String userId, String postId);
-    List<Like> findAllByUUID(String userId);
-    List<Like> findAllByUPID(String postId);
-    Long countAllByUPID(String postId);
-    Long countAllByUUID(String userId);
+    Like findByUUIDAndUPID(String UUID, String UPID);
+    void deleteByUUIDAndUPID(String UUID, String UPID);
+    List<Like> findAllByUUID(String UUID);
+    List<Like> findAllByUPID(String UPID);
+    Long countAllByUPID(String UPID);
+    Long countAllByUUID(String UPID);
 }

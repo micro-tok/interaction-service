@@ -6,15 +6,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommentDto {
-    private Long id;
     private String UUID;
     private String UPID;
+    private String PUUID;
+    private String content;
 
     public CommentDto() {
     }
 
-    public CommentDto(Long id, String UUID, String UPID) {
-        this.id = id;
+    public CommentDto(String UUID, String UPID) {
         this.UUID = UUID;
         this.UPID = UPID;
     }

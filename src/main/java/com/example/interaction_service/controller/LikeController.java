@@ -1,6 +1,8 @@
 package com.example.interaction_service.controller;
 
 import com.example.interaction_service.dto.LikeDto;
+import com.example.interaction_service.dto.UPIDDto;
+import com.example.interaction_service.dto.UUIDDto;
 import com.example.interaction_service.service.LikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,17 +31,22 @@ public class LikeController {
     }
 
     @GetMapping("/countAllByPostId")
-    public ResponseEntity<?> countAllByPostId(@RequestBody String postId) {
-        return ResponseEntity.ok(likeService.countAllByPostId(postId));
+    public ResponseEntity<?> countAllByPostId(@RequestBody UPIDDto UPID) {
+        return ResponseEntity.ok(likeService.countAllByPostId(UPID.getUPID()));
     }
 
     @GetMapping("/countAllByUserId")
-    public ResponseEntity<?> countAllByUserId(@RequestBody String userId) {
-        return ResponseEntity.ok(likeService.countAllByUserId(userId));
+    public ResponseEntity<?> countAllByUserId(@RequestBody UUIDDto UUID) {
+        return ResponseEntity.ok(likeService.countAllByUserId(UUID.getUUID()));
     }
 
     @GetMapping("/findAllByUserId")
-    public ResponseEntity<?> findAllByUserId(@RequestBody String userId) {
-        return ResponseEntity.ok(likeService.findAllByUserId(userId));
+    public ResponseEntity<?> findAllByUserId(@RequestBody UUIDDto UUID) {
+        return ResponseEntity.ok(likeService.findAllByUserId(UUID.getUUID()));
+    }
+
+    @GetMapping("/findAllByPostId")
+    public ResponseEntity<?> findAllByPostId(@RequestBody UPIDDto UPID) {
+        return ResponseEntity.ok(likeService.findAllByPostId(UPID.getUPID()));
     }
 }

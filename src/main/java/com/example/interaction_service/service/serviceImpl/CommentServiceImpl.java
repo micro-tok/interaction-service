@@ -35,12 +35,12 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Long countAllByPostId(String postId) {
-        return commentRepository.countAllByUPID(postId);
+        return (long) commentRepository.findAllByUPID(postId).size();
     }
 
     @Override
     public Long countAllByUserId(String userId) {
-        return commentRepository.countAllByUUID(userId);
+        return (long) commentRepository.findAllByUUID(userId).size();
     }
 
     @Override

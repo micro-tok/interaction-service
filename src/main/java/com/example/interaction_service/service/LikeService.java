@@ -12,5 +12,6 @@ public interface LikeService {
     Long countAllByPostId(String postId);
     Long countAllByUserId(String userId);
     List<LikeDto> findAllByUserId(String userId);
+    List<LikeDto> findAllByPostId(String postId);
     List<LikeDto> findAll();
 }

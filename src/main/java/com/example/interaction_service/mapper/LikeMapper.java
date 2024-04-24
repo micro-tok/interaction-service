@@ -22,4 +22,6 @@ public interface LikeMapper {
     LikeDto toDto(Like like);
 
     List<Like> toEntities(List<LikeDto> likeDtos);
+
+    List<LikeDto> toDtos(List<Like> likes);
 }
